@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name               = "hola"
+  s.name               = "rubygemtest"
   s.version            = "0.0.2"
   s.default_executable = "rubygemtest"
 
