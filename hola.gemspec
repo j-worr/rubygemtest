@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = %q{nick@quaran.to}
   s.files = ["Rakefile", "lib/hola.rb", "lib/hola/translator.rb", "bin/hola"]
   s.test_files = ["test/test_hola.rb"]
-  s.homepage = %q{http://rubygems.org/gems/hola}
+  s.homepage = %q{https://github.com/j-worr/rubygemtest}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.6.2}
   s.summary = %q{Hola!}
