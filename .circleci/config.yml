@@ -20,6 +20,23 @@ jobs:
           name: Which bundler?
           command: bundle -v
       - ruby/bundle-install
+      - run: 
+          name: set credentials
+          command:  |
+            mkdir -p $HOME/.gem
+            touch $HOME/.gem/credentials
+            chmod 0600 $HOME/.gem/credentials
+            printf -- "---\n:github: Bearer ${GITHUB_TOKEN}\n" > $HOME/.gem/credentials
+          env:
+             GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - run:
+          name: publish to githb packages
+          command: |
+            export OWNER=$( echo ${{ github.repository }} | cut -d "/" -f 1 )
+            gem build spoonflower_core.gemspec
+            gem push --KEY github --host https://rubygems.pkg.github.com/${OWNER} *.gem
+
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
