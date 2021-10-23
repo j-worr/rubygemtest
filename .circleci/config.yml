@@ -26,11 +26,11 @@ jobs:
             mkdir -p $HOME/.gem
             touch $HOME/.gem/credentials
             chmod 0600 $HOME/.gem/credentials
+            echo ${GITHUB_TOKEN}
             printf -- "---\n:github: Bearer ${GITHUB_TOKEN}\n" > $HOME/.gem/credentials
       - run:
           name: publish to githb packages
           command: |
-            export OWNER=$( echo ${{ github.repository }} | cut -d "/" -f 1 )
             gem build hola.gemspec
             gem push --KEY github --host https://rubygems.pkg.github.com/j-worr *.gem
 
