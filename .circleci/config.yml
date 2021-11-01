@@ -37,16 +37,13 @@ jobs:
             CURRENT_YEAR=$(date +%Y)
             CURRENT_MONTH=$(date +%m)
             VERSIONTAG=.$CURRENT_YEAR.$CURRENT_MONTH.${CIRCLE_BUILD_NUM}.gem
-            echo $VERSIONTAG
-            for i in `ls *.gem`;do j=${i::-4} && k=$j$VERSIONTAG && mv $i $k; done
-            ls *.gem
-      
+            for i in `ls *.gem`;do j=${i::-4} && k=$j$VERSIONTAG && mv $i $k; done    
       - run:
           name: publish gem to github packages
           command:
-            gem push --KEY github --host https://rubygems.pkg.github.com/j-worr *.gem
-
-
+            mygem=$(ls *.gem)
+            echo $mygem
+            gem push --KEY github --host https://rubygems.pkg.github.com/j-worr $mygem
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
