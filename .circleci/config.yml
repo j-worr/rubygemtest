@@ -37,7 +37,9 @@ jobs:
             CURRENT_YEAR=$(date +%Y)
             CURRENT_MONTH=$(date +%m)
             VERSIONTAG=.$CURRENT_YEAR.$CURRENT_MONTH.${CIRCLE_BUILD_NUM}.gem
+            echo $VERSIONTAG
             for i in `ls *.gem`;do j=${i::-4} && k=$j$VERSIONTAG && mv $i $k; done
+            ls *.gem
       
       - run:
           name: publish gem to github packages
