@@ -40,7 +40,7 @@ jobs:
             for i in `ls *.gem`;do j=${i::-4} && k=$j$VERSIONTAG && mv $i $k; done    
       - run:
           name: publish gem to github packages
-          command:
+          command:  |
             mygem=$(ls *.gem)
             echo $mygem
             gem push --KEY github --host https://rubygems.pkg.github.com/j-worr $mygem
