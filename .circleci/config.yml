@@ -37,7 +37,7 @@ jobs:
             CURRENT_YEAR=$(date +%Y)
             CURRENT_MONTH=$(date +%m)
             VERSIONTAG=$CURRENT_YEAR.$CURRENT_MONTH.${CIRCLE_BUILD_NUM}.gem
-            #for i in `ls *.gem`; do mv $i spoonflower_core-$VERSIONTAG; done  
+            for i in `ls *.gem`; do mv $i spoonflower_core-$VERSIONTAG; done  
       - run:
           name: publish gem to github packages
           command:  |
