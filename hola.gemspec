@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name               = "rubygemtest"
-  s.version            = "12.5.9"
+  s.version            = YAML.load_file('./settings.yml')['version']
   s.default_executable = "rubygemtest"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
