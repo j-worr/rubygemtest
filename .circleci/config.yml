@@ -28,22 +28,19 @@ jobs:
             chmod 0600 $HOME/.gem/credentials
             printf -- "---\n:github: Bearer ${GITHUB_TOKEN}\n" > $HOME/.gem/credentials
       - run:
+          name: update settings.yml with CI build versioning
+          command:  |
+            sed -i "s:[0-9]*\.[0-9]*\.[0-9]*:$(date +%Y.%m).${CIRCLE_BUILD_NUM:-0}:" settings.yml  
+      - run:
           name: build gem
           command:
             gem build hola.gemspec
-      - run:
-          name: update gem with naming convention
-          command:  |
-            CURRENT_YEAR=$(date +%Y)
-            CURRENT_MONTH=$(date +%m)
-            VERSIONTAG=$CURRENT_YEAR.$CURRENT_MONTH.${CIRCLE_BUILD_NUM}.gem
-            for i in `ls *.gem`; do mv $i spoonflower_core-$VERSIONTAG; done  
       - run:
           name: publish gem to github packages
           command:  |
             mygem=$(ls *.gem)
             echo $mygem
-            gem push --KEY github --host https://rubygems.pkg.github.com/j-worr $mygem
+            gem push --KEY github --host https://rubygems.pkg.github.com/j-worr *.gem
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
