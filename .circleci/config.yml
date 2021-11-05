@@ -20,6 +20,16 @@ jobs:
           name: Which bundler?
           command: bundle -v
       - ruby/bundle-install
+  build_and_package:
+    docker:
+      - image: cimg/ruby:2.5.5
+    executor: ruby/default
+    steps:
+      - checkout
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      - ruby/bundle-install     
       - run: 
           name: set credentials
           command:  |
@@ -51,3 +61,14 @@ workflows:
       - build:
           context:
             - my_context
+          filters:
+            branches:
+              ignore:
+                - main
+      - build_and_package:
+          context:
+            - my_context
+          filters:
+            branches:
+              only:
+                - main
