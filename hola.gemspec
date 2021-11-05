@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.6.2}
   s.summary = %q{Hola!}
+  s.metadata['allowed_push_host'] = '*github.com'
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
